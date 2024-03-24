@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Rating } from 'react-simple-star-rating';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 export default function RatingComponent({ id }) {
   const [_, setRating] = useState(0);
+  const [cookie, setCookie] = useCookies();
 
   // Catch Rating value
   const handleRating = async (rate) => {
