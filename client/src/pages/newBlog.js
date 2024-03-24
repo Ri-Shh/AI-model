@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 
 const categories = ['Text to Image', 'Sentiment Analysis', 'Image Classification', 'Summarization', 'Translation', 'Voice Activity Detection', 'Reinforcement Learning', 'Robotics', 'Video Classification', 'Feature Extraction', 'Object Detection', 'Sentiment Analysis', 'GLOW Model'];
 let catObject = [];
-x = 1;
+let x = 1;
 for(let i = 0; i < categories.length; i++) {
   catObject.push({
     name: categories[i],
@@ -28,11 +28,6 @@ function NewBlogPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const words = modelDescription.trim().split(/\s+/);
-    if (words.length > 250) {
-      setValidationError('Model description should be less than 250 words.');
-      return;
-    }
     const data = {
       Userid: cookie.userid,
       Cat: category,
@@ -78,7 +73,7 @@ function NewBlogPage() {
                   <input
                     type='text'
                     className='form-control'
-                    value={modelName}
+                    value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                   />
@@ -101,7 +96,7 @@ function NewBlogPage() {
                   <label className= {styles['label']}>Explain your query:</label>
                   <textarea
                     className='form-control'
-                    value={modelDescription}
+                    value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
                   />
