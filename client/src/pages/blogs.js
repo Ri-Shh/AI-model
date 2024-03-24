@@ -10,9 +10,6 @@ function Blogs() {
     return (
         <div className={styles.modelsPage}>
             <div className={styles.container}>
-                {/* <div className={styles.sidebar}>
-                    <Categories setTask={setTask} setLibrary={setLibrary} />
-                </div> */}
                 <div className={styles.display}>
                     <RightBlogs task={task} library={library} />
                 </div>

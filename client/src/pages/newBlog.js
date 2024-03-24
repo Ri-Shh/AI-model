@@ -4,17 +4,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-
-const libraries = ['Pytorch', 'Tensorflow', 'Keras', 'Transformers', 'NeMo', 'OpenCLIP', 'Rust', 'spaCy', 'paddlenlp', 'Diffusers', 'fastText'];
-let libObject = [];
-let x = 1;
-for(let i = 0; i < libraries.length; i++) {
-  libObject.push({
-    name: libraries[i],
-    id: x++
-  });
-}
-
 const categories = ['Text to Image', 'Sentiment Analysis', 'Image Classification', 'Summarization', 'Translation', 'Voice Activity Detection', 'Reinforcement Learning', 'Robotics', 'Video Classification', 'Feature Extraction', 'Object Detection', 'Sentiment Analysis', 'GLOW Model'];
 let catObject = [];
 x = 1;
@@ -25,15 +14,12 @@ for(let i = 0; i < categories.length; i++) {
   });
 }
 
-
 function NewBlogPage() {
   
   const navigator = useNavigate();
-  const [modelName, setModelName] = useState('');
   const [category, setCategory] = useState('');
-  const [library, setLibrary] = useState('');
-  const [githubLink, setGithubLink] = useState('');
-  const [modelDescription, setModelDescription] = useState('');
+  const [content, setContent] = useState('');
+  const [title, setTitle] = useState('');
   const [validationError, setValidationError] = useState('');
   
   const [cookie, _] = useCookies();
@@ -49,24 +35,22 @@ function NewBlogPage() {
     }
     const data = {
       Userid: cookie.userid,
-      Modelname: modelName,
-      Desc: modelDescription,
-      Url: githubLink,
       Cat: category,
-      Lib: library
+      Content: content,
+      Title: title
     }
     await axios.post('https://ai-model-api.azurewebsites.net/'+'/api/blogs', data, 
-    { withCredentials: true,
+    {
       headers: {
         Authorization: `Bearer ${cookie['token']}` // Include the access token in the Authorization header
       } })
     .then(response => {
       // console.log(response.data.success);
-      console.log('Blog has been posted');
+      console.log('Query has been posted');
       navigator('/');
     })
     .catch(e => {
-      console.log(`Error in posting model: ${e}`);
+      console.log(`Error in posting query: ${e}`);
     })
   };
 
@@ -95,7 +79,7 @@ function NewBlogPage() {
                     type='text'
                     className='form-control'
                     value={modelName}
-                    onChange={(e) => setModelName(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                     required
                   />
                 </div>
@@ -118,7 +102,7 @@ function NewBlogPage() {
                   <textarea
                     className='form-control'
                     value={modelDescription}
-                    onChange={(e) => setModelDescription(e.target.value)}
+                    onChange={(e) => setContent(e.target.value)}
                     required
                   />
                 </div>
