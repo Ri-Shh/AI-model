@@ -31,7 +31,7 @@ const TextToSpeech = () => {
       <input className={styles.input} type="text" value={text} onChange={handleTextChange} />
       <div className={styles.sayButton}>
       <SayButton
-        speak={text} style={{width: '30px',height: '30px'}}
+        speak={text}
         onClick={() => {
             console.log('Speech started:', text);
         }}
