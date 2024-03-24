@@ -50,7 +50,10 @@ function ModelDesc() {
 
   const handleLike = async (e) => {
     e.preventDefault();
-    await axios.patch('https://ai-model-api.azurewebsites.net/'+`/api/models/${id}`, {likedBy: cookie.userid})
+    await axios.patch('https://ai-model-api.azurewebsites.net/'+`/api/models/${id}`, {likedBy: cookie.userid},
+    {headers: {
+      Authorization: `Bearer ${cookie['token']}` // Include the access token in the Authorization header
+    }})
     .then(response => {
       setLikes(response.data.model.likes.length);
     })
