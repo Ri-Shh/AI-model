@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Button } from 'react-bootstrap';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
@@ -12,22 +11,18 @@ import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 function LeftProfile() {
 
     const navigator = useNavigate();
-    const [cookie, _] = useCookies();
+    const [cookie, setCookie, removeCookie] = useCookies();
     const path = `/profile/${cookie.userid}`;
 
-    
     const handleLogout = async (e) => {
         e.preventDefault();
-        await axios.get('https://ai-model-api.azurewebsites.net/auth/logout', { withCredentials: true})
-        .then(() => {
-          console.log(`Logged out`);
-        })
-        .catch(e => {
-          console.log(`Error in logging out: ${e}`);
-        });
-        // removeCookie('userid');
-        // removeCookie('token');
-      }
+        removeCookie('userid');
+        removeCookie('token');
+        removeCookie('email');
+        removeCookie('username');
+        removeCookie('name');
+        setCookie('authenticated', false, {path: '/'});
+    }
     
       const handleLogin = (e) => {
         navigator('/login');

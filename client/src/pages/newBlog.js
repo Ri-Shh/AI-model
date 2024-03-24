@@ -55,7 +55,11 @@ function NewBlogPage() {
       Cat: category,
       Lib: library
     }
-    await axios.post('https://ai-model-api.azurewebsites.net/'+'/api/blogs', data)
+    await axios.post('https://ai-model-api.azurewebsites.net/'+'/api/blogs', data, 
+    { withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${cookie['token']}` // Include the access token in the Authorization header
+      } })
     .then(response => {
       // console.log(response.data.success);
       console.log('Blog has been posted');
