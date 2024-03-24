@@ -11,9 +11,8 @@
 }
 
 .query {
-    border: 2px dashed gray;
-    box-shadow: 10px 10px gray;
-    /* box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08); */
+    border: 1px dashed black;
+    box-shadow: 5px 5px black;
     height: auto;
     width: auto;
     background-color: rgb(228, 228, 228);
