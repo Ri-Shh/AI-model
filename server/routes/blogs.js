@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', requireLoggedIn, async (req, res) => {
     // validate first
 
-    const { Userid, Content, Title } = req.body;
+    const { Userid, Content, Title, Cat } = req.body;
 
     // encode image
     // const encodedImage = img.toString('base64');
@@ -65,7 +65,7 @@ router.post('/', requireLoggedIn, async (req, res) => {
         userid: Userid,
         content: Content,
         title: Title,
-        likes: 0
+        category: Cat
     });
     await blog.save()
     .then((doc) => {

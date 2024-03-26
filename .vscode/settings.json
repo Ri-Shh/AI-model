@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/8dfbcdc3-347f-402f-af7c-be062c51410b/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/ai-model-api",
+    "appService.deploySubpath": "server"
+}

@@ -18,7 +18,7 @@ const db = require('./db-config.js');
 
 
 // use the cors middleware 
-app.use(cors({ origin: true, methods: ['GET', 'POST', 'PATCH', 'DELETE'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3000/', 'https://ai-model-client.vercel.app/', 'https://ai-model-client.vercel.app'], methods: ['GET', 'POST', 'PATCH', 'DELETE'], credentials: true }));
 console.log("Hello world!!");
 
 // use the body-parser middleware to parse JSON and URL-encoded data
@@ -27,8 +27,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
+app.all('/', (req, res) => {
+    console.log("Request received successfully");
+});
+
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+
 
 // listen
 const PORT = process.env.PORT || 4000;

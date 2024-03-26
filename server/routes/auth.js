@@ -14,8 +14,7 @@ router.post('/register', async (req, res) => {
         res.json("Registration failed!!");
     } else {
         const token = jwt.sign({id: toString(user._id)}, process.env.JWTSECRET || "secret-key-here", {expiresIn: "1d"});
-        res.cookie("token", token);
-        res.status(201).json({user: user});
+        res.status(201).json({user: user, token: token});
     }
 });
 
@@ -26,9 +25,8 @@ router.post('/login', async (req, res) => {
         bcrypt.compare(password, user.password, (match) => {
             if(!match) res.json({error: "Username and password is incorrect"});
             const token = jwt.sign({id: toString(user._id)}, process.env.JWTSECRET || "secret-key-here", {expiresIn: "1d"});
-            res.cookie("token", token);
             console.log(user);
-            res.status(201).json({user: user});
+            res.status(201).json({user: user, token: token});
         });
     } else {
         console.log(user);
@@ -37,14 +35,5 @@ router.post('/login', async (req, res) => {
 
 })
 
-router.get('/logout', (req, res) => {
-    res.clearCookie('token');
-    res.clearCookie('userid');
-    res.clearCookie('authenticated');
-    res.clearCookie('email');
-    res.clearCookie('username');
-    res.clearCookie('name');
-    res.redirect('/');
-})
 
 module.exports = router;

@@ -21,6 +21,7 @@ const AIModelSchema = new Schema({
     },
     likes: {
         type: Array,
+        default: []
     },
     count: {
         type: Number,
